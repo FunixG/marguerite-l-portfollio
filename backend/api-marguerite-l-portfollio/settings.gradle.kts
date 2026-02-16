@@ -17,6 +17,8 @@ pluginManagement {
 
 rootProject.name = "api-marguerite-l-portfollio"
 
-include(":services:auth")
-include(":services:projects")
+include(":services:auth:api")
+include(":services:auth:service")
 
+include(":services:projects:api")
+include(":services:projects:service")

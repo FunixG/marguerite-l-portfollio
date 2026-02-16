@@ -1,5 +1,5 @@
 [versions]
-dev-funixgaming-spring-core = "1.4.0"
+dev-funixgaming-spring-core = "1.4.1"
 
 [libraries]
 dev-funixgaming-core-crud = { module = "dev.funixgaming.spring.core.crud:crud", version.ref = "dev-funixgaming-spring-core" }
