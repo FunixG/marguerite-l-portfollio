@@ -23,4 +23,4 @@ jobs:
           cache: gradle
 
       - name: Test and build
-        run: ./backend/api-marguerite-l-portfollio/gradlew test
+        run: cd ./backend/api-marguerite-l-portfollio/ && ./gradlew test
