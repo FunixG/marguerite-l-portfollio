@@ -1,1 +1,1 @@
-create database if not exists projects_db;
+create database projects_db;
