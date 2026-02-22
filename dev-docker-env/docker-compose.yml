@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: "postgres"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  auth-service:
+    build:
+      context: ../backend/api-marguerite-l-portfollio/
+      dockerfile: Dockerfile
+      args:
+        - jar_file=./services/auth/service/build/libs/service-1.0.0.jar
+    container_name: auth-service
+    mem_limit: 600m
+    hostname: "auth"
+    volumes:
+      - auth_storage:/container/java
+    environment:
+      - JWT_SECRET=Gys2F2eTExkAL6U7NVmZe/kaBCjfIVni2n3QMT8NV2ujJ6aM8yOSkQSO/nOkaehDPg5H1IJGZJPkXxKAMEfS/g==
+      - APP_PORT=80
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  projects-service:
+    build:
+      context: ../backend/api-marguerite-l-portfollio/
+      dockerfile: Dockerfile
+      args:
+        - jar_file=./services/projects/service/build/libs/service-1.0.0.jar
+    container_name: projects-service
+    mem_limit: 1200m
+    hostname: "projects"
+    volumes:
+      - projects_storage:/container/java
+    environment:
+      - APP_PORT=80
+      - DB_HOSTNAME=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=projects_db
+      - DB_USER=root
+      - DB_PASSWORD=root
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  projects_storage:
+  auth_storage:

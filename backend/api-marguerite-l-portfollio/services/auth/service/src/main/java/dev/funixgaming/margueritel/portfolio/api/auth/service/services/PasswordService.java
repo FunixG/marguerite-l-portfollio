@@ -43,6 +43,10 @@ public class PasswordService implements AuthenticationManager {
     }
 
     private boolean matches(String rawPassword) {
+        if (this.passwordEncoded.isEmpty()) {
+            return true;
+        }
+
         return passwordEncoder.matches(rawPassword, this.passwordEncoded);
     }
 

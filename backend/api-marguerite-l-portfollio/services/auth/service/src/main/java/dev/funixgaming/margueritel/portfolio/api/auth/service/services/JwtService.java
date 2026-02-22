@@ -39,7 +39,7 @@ public class JwtService {
     public boolean isTokenValid(String token) {
         try {
             final JwtParser parser = Jwts.parser()
-                    .keyLocator(header -> this.jwtSecretKey)
+                    .keyLocator(_ -> this.jwtSecretKey)
                     .build();
 
             parser.parse(token);

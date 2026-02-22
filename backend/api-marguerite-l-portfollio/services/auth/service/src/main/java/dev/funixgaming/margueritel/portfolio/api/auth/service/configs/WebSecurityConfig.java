@@ -17,9 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final JwtTokenFilter jwtTokenFilter;
+    private final JwtTokenServiceFilter jwtTokenFilter;
 
-    public WebSecurityConfig(JwtTokenFilter jwtTokenFilter) {
+    public WebSecurityConfig(JwtTokenServiceFilter jwtTokenFilter) {
         this.jwtTokenFilter = jwtTokenFilter;
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
