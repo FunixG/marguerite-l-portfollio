@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: protfolio-front-deployment
+  namespace: 'marguerite-lanson'
+  labels:
+    app: angular
+    service: protfolio
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+      service: protfolio
+  template:
+    metadata:
+      namespace: 'marguerite-lanson'
+      annotations:
+        build-time: "TIME-UPDATE-BUILD-FNG"
+      labels:
+        app: angular
+        service: protfolio
+    spec:
+      containers:
+        - name: angular-protfolio-front
+          image: ghcr.io/funixg/marguerite-l-portfolio-frontend:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "500Mi"
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  namespace: 'marguerite-lanson'
+  name: protfolio
+
+spec:
+  type: ClusterIP
+  selector:
+    app: angular
+    service: protfolio
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

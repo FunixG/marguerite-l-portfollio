@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: 'marguerite-lanson'
+  name: protfolio-front-ingress
+  annotations:
+    spec.ingressClassName: traefik
+spec:
+  tls:
+    - secretName: marguerite-lanson-front-certificate-tls
+  rules:
+    - host: marguerite-lanson.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: protfolio
+                port:
+                  number: 80
