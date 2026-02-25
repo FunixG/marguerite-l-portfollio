@@ -23,7 +23,7 @@ jobs:
           cache: gradle
 
       - name: Test and build
-        run: cd ./backend/api-marguerite-l-portfollio/ && ./gradlew test
+        run: cd ./backend/api-marguerite-l-portfolio/ && ./gradlew test
         env:
           GITHUB_AUTH_USERNAME: ${{ github.actor }}
           GITHUB_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
