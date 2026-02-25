@@ -13,6 +13,6 @@ ENV HOME /home/container
 WORKDIR /home/container
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=BUILD /container/build/dist/marguerite-protfolio-angular-front /usr/share/nginx/html
+COPY --from=BUILD /container/build/dist/marguerite-protfolio-angular-front/browser /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
