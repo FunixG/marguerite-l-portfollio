@@ -1,1 +1,5 @@
-<p>admin works!</p>
+@if (authenticated) {
+    <app-admin-projects-list></app-admin-projects-list>
+} @else {
+    <app-admin-login></app-admin-login>
+}
