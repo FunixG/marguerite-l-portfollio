@@ -1,6 +1,6 @@
 package dev.funixgaming.margueritel.portfolio.api.auth.service.resources;
 
-import dev.funixgaming.margueritel.portfolio.api.auth.service.services.JwtService;
+import dev.funixgaming.margueritel.portfolio.api.auth.api.dtos.TokenDTO;import dev.funixgaming.margueritel.portfolio.api.auth.service.services.JwtService;
 import dev.funixgaming.margueritel.portfolio.api.auth.service.services.PasswordService;
 import dev.funixgaming.margueritel.portfolio.api.auth.api.dtos.PasswordRequestDTO;
 import dev.funixgaming.spring.core.exceptions.ApiBadRequestException;
@@ -27,9 +27,9 @@ public class AuthResource {
      * @return JWT token
      */
     @PostMapping("login")
-    public String login(@RequestBody @Valid @NotBlank(message = "Le mot de passe est requis") String password) throws ApiException {
+    public TokenDTO login(@RequestBody @Valid @NotBlank(message = "Le mot de passe est requis") String password) throws ApiException {
         this.passwordService.authenticate(new UsernamePasswordAuthenticationToken(null, password));
-        return this.jwtService.generateToken();
+        return new TokenDTO(this.jwtService.generateToken());
     }
 
     /**

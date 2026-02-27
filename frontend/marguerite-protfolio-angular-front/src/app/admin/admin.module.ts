@@ -5,6 +5,9 @@ import {AdminComponent} from "./admin.component";
 import {AdminLoginComponent} from "./admin-login/admin-login.component";
 import {AdminProjectManagerComponent} from "./admin-project-manager/admin-project-manager.component";
 import {AdminProjectsListComponent} from "./admin-projects-list/admin-projects-list.component";
+import {ButtonComponent} from "../components/button/button.component";
+import {InputTextComponent} from "../components/inputs/input-text/input-text.component";
+import {LoaderComponent} from "../components/loader/loader.component";
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import {AdminProjectsListComponent} from "./admin-projects-list/admin-projects-l
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ButtonComponent,
+    InputTextComponent,
+    LoaderComponent
   ]
 })
 export class AdminModule { }

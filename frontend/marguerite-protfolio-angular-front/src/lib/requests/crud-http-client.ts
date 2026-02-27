@@ -42,6 +42,8 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
         return this.http.get<PageDTO<DTO>>(this.domain + this.path, {headers: super.getHeaders(), params: {...params}})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -51,6 +53,8 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
         return this.http.get<DTO>(this.domain + this.path + "/" + id, {headers: super.getHeaders()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -60,6 +64,8 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
         return this.http.post<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -69,6 +75,8 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
         return this.http.patch<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -78,6 +86,8 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
         return this.http.put<DTO>(this.domain + this.path, dto, {headers: super.getHeaders()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -91,8 +101,18 @@ export abstract class CrudHttpClient<DTO extends ApiDTO> extends GenericHttpClie
             headers: super.getHeaders()
         }).pipe(
             catchError((error: HttpErrorResponse) => {
+                this.checkUnauthorized(error);
+
                 return throwError(() => this.buildErrorDto(error));
             })
         )
+    }
+
+    protected checkUnauthorized(error: HttpErrorResponse): void {
+        if (error.status === 401) {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.removeItem(GenericHttpClient.accessTokenLocalStorageName);
+            }
+        }
     }
 }

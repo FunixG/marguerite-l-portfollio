@@ -3,7 +3,7 @@ import {ErrorDto} from "../dtos/error-dto";
 
 export abstract class GenericHttpClient {
 
-    protected getBearer(): string | null {
+    public static getBearer(): string | null {
         if (typeof localStorage === 'undefined') {
             return null;
         } else {
@@ -11,7 +11,7 @@ export abstract class GenericHttpClient {
         }
     }
 
-    public static readonly accessTokenLocalStorageName: string = 'user-token-requests'
+    public static readonly accessTokenLocalStorageName: string = 'user-mgl-token-requests'
     private static readonly captchaHeaderCode: string = 'X-Captcha-Google-Code';
     public static readonly headerAuth: string = 'Authorization';
     public static readonly bearerPrefix: string = 'Bearer';

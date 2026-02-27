@@ -18,6 +18,8 @@ export class StorageCrudHttpClient<DTO extends ApiDTO> extends CrudHttpClient<DT
         return this.http.post<DTO>(this.domain + this.path + '/file', formData, {headers: this.getHeadersAuth()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -31,6 +33,8 @@ export class StorageCrudHttpClient<DTO extends ApiDTO> extends CrudHttpClient<DT
         return this.http.post<DTO>(this.domain + this.path + '/file-patch', formData, {headers: this.getHeadersAuth()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
@@ -44,6 +48,8 @@ export class StorageCrudHttpClient<DTO extends ApiDTO> extends CrudHttpClient<DT
         return this.http.post<DTO>(this.domain + this.path + '/file-put', formData, {headers: this.getHeadersAuth()})
             .pipe(
                 catchError((error: HttpErrorResponse) => {
+                    this.checkUnauthorized(error);
+
                     return throwError(() => this.buildErrorDto(error));
                 })
             );
