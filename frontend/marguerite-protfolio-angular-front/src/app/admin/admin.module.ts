@@ -8,20 +8,23 @@ import {AdminProjectsListComponent} from "./admin-projects-list/admin-projects-l
 import {ButtonComponent} from "../components/button/button.component";
 import {InputTextComponent} from "../components/inputs/input-text/input-text.component";
 import {LoaderComponent} from "../components/loader/loader.component";
+import {PasswordComponent} from "./password/password.component";
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminLoginComponent,
     AdminProjectManagerComponent,
-    AdminProjectsListComponent
+    AdminProjectsListComponent,
+    PasswordComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ButtonComponent,
     InputTextComponent,
-    LoaderComponent
+    LoaderComponent,
+    ButtonComponent
   ]
 })
 export class AdminModule { }

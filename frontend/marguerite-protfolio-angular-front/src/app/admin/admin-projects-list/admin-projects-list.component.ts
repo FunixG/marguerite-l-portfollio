@@ -25,14 +25,13 @@ export class AdminProjectsListComponent implements OnInit {
                 next: (projects: PageDTO<ProjectDto>) => {
                     this.projects = projects.content
                     this.loading = false
+                    this.cdRef.detectChanges()
                 },
                 error: (err: ErrorDto) => {
-                    this.loading = false
-
                     if (err.status == 401) {
                         globalThis.location.reload()
                     } else {
-                        this.cdRef.detectChanges()
+                        alert('Une erreur est survenue lors du chargement des projets. Rechargez la page ou contactez votre administrateur.')
                     }
                 }
             })

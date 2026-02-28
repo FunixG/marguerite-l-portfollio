@@ -28,7 +28,7 @@ public class Project extends ApiEntity {
     @Column(nullable = false, name = "json_code", columnDefinition = "TEXT")
     private String jsonCode;
 
-    @Column(nullable = false, name = "cover_media_uuid")
+    @Column(nullable = false, name = "cover_media_id")
     private String coverMediaId;
 
 }

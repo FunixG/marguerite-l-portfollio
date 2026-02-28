@@ -6,7 +6,6 @@ import {GenericHttpClient} from "../../../lib/requests/generic-http-client";
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
-  styleUrl: './admin-login.component.css',
   standalone: false
 })
 export class AdminLoginComponent {
