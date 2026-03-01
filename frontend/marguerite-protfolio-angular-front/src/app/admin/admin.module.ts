@@ -25,7 +25,6 @@ import {
 } from "./admin-project-manager/modules/admin-video-module/admin-video-module.component";
 import {ProjectTitleComponent} from "./admin-project-manager/project-title/project-title.component";
 import {ProjectDescriptionComponent} from "./admin-project-manager/project-description/project-description.component";
-import {ProjectUrlComponent} from "./admin-project-manager/project-url/project-url.component";
 import {ProjectCoverImageComponent} from "./admin-project-manager/project-cover-image/project-cover-image.component";
 import {FormsModule} from "@angular/forms";
 import {ModulesManagerComponent} from "./admin-project-manager/modules-manager/modules-manager.component";
@@ -47,7 +46,6 @@ import {VideoPreviewComponent} from "./admin-project-manager/previews/video-prev
     AdminVideoModuleComponent,
     ProjectTitleComponent,
     ProjectDescriptionComponent,
-    ProjectUrlComponent,
     ProjectCoverImageComponent,
     ModulesManagerComponent,
     ImagePreviewComponent,

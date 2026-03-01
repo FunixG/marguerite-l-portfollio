@@ -5,6 +5,7 @@
                 class="title-input"
                 placeholder="Entre le titre du projet"
                 [(ngModel)]="projectsService.loadedProject.title"
+                (ngModelChange)="titleUpdated()"
                 maxlength="120"
         />
     </div>
