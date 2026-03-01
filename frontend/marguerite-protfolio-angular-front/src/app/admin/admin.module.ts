@@ -10,9 +10,19 @@ import {InputTextComponent} from "../components/inputs/input-text/input-text.com
 import {LoaderComponent} from "../components/loader/loader.component";
 import {PasswordComponent} from "./password/password.component";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {AdminTextModuleComponent} from "./admin-project-manager/modules/admin-text-module/admin-text-module.component";
 import {
-  AdminTextModuleComponent
-} from "./admin-project-manager/modules/text/admin-text-module/admin-text-module.component";
+  AdminImageAndImageModuleComponent
+} from "./admin-project-manager/modules/admin-image-and-image-module/admin-image-and-image-module.component";
+import {
+  AdminImageAndTextModuleComponent
+} from "./admin-project-manager/modules/admin-image-and-text-module/admin-image-and-text-module.component";
+import {
+  AdminTextAndImageModuleComponent
+} from "./admin-project-manager/modules/admin-text-and-image-module/admin-text-and-image-module.component";
+import {
+  AdminVideoModuleComponent
+} from "./admin-project-manager/modules/admin-video-module/admin-video-module.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +31,11 @@ import {
     AdminProjectManagerComponent,
     AdminProjectsListComponent,
     PasswordComponent,
-    AdminTextModuleComponent
+    AdminTextModuleComponent,
+    AdminImageAndImageModuleComponent,
+    AdminImageAndTextModuleComponent,
+    AdminTextAndImageModuleComponent,
+    AdminVideoModuleComponent
   ],
   imports: [
     CommonModule,

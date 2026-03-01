@@ -5,7 +5,11 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {BaseProjectModule} from "./modules/base-project-module";
 import {ErrorDto} from "../../lib/dtos/error-dto";
-import {TextProjectModule} from "./modules/text/text-project-module";
+import {TextProjectModule} from "./modules/text-project-module";
+import {ImageAndImageModule} from "./modules/image-and-image-module";
+import {ImageAndTextModule} from "./modules/image-and-text-module";
+import {TextAndImageModule} from "./modules/text-and-image-module";
+import {VideoModule} from "./modules/video-module";
 
 @Injectable({
     providedIn: 'root'
@@ -60,8 +64,14 @@ export default class ProjectsService extends CrudHttpClient<ProjectDto> {
         this.loadedProject.htmlCode = htmlCode;
     }
 
-    getModuleById(id: string): BaseProjectModule | undefined {
-        return this.modules.find(module => module.getId() == id);
+    getModuleById<T extends BaseProjectModule>(id: string): T | undefined {
+        const module: BaseProjectModule | undefined = this.modules.find(module => module.getId() == id);
+
+        if (module) {
+            return module as T;
+        } else {
+            return undefined;
+        }
     }
 
     private loadProjectsModules(): BaseProjectModule[] {
@@ -84,9 +94,16 @@ export default class ProjectsService extends CrudHttpClient<ProjectDto> {
 
     private getModuleByName(data: { data: string, type: string }): BaseProjectModule | undefined {
         switch (data.type) {
+            case new ImageAndImageModule().moduleName:
+                return ImageAndImageModule.fromJson(data.data);
+            case new ImageAndTextModule().moduleName:
+                return ImageAndTextModule.fromJson(data.data);
+            case new TextAndImageModule().moduleName:
+                return TextAndImageModule.fromJson(data.data);
             case new TextProjectModule().moduleName:
-                return TextProjectModule.fromJson(data.type);
-
+                return TextProjectModule.fromJson(data.data);
+            case new VideoModule().moduleName:
+                return VideoModule.fromJson(data.data);
 
             default:
                 console.warn("Unknown module name: " + data.type);

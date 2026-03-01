@@ -1,4 +1,4 @@
-import {ProjectModule} from "../base-project-module";
+import {ProjectModule} from "./base-project-module";
 
 export class TextProjectModule extends ProjectModule {
     text: string;
