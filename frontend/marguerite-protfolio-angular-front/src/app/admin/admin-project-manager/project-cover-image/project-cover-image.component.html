@@ -1,1 +1,18 @@
-<p>project-cover-image works!</p>
+@if (projectsService.loadedProject) {
+    <h2>Image de couverture</h2>
+    <div class="text-center">
+        @if (projectsService.loadedProject.coverMediaId.length > 0) {
+
+        } @else {
+            <div>
+                <app-image-preview></app-image-preview>
+            </div>
+            <div>
+                <app-button
+                        [label]="'Ajouter'"
+                        (onClick)="openMediaSelector()"
+                ></app-button>
+            </div>
+        }
+    </div>
+}
