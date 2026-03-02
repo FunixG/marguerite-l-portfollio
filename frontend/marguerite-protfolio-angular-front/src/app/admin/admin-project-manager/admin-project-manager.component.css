@@ -34,3 +34,7 @@
     font-size: 1.2em;
     margin-bottom: 20px;
 }
+
+.modules-div {
+    min-height: 80vh;
+}

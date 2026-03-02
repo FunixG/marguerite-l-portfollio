@@ -5,47 +5,55 @@
         <h1>Définition du projet</h1>
 
         <app-project-title></app-project-title>
-        <app-project-description></app-project-description>
-        <app-project-cover-image></app-project-cover-image>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <app-project-description></app-project-description>
+            </div>
+            <div class="col-md-6">
+                <app-project-cover-image></app-project-cover-image>
+            </div>
+        </div>
 
         <hr>
 
         <h1>Modules</h1>
 
-        @if (projectsService.modules.length === 0) {
-            <div class="no-modules-container">
-                <p>Pas de modules ! 👋</p>
-                <p>Ajoute un module avec le bouton 📂 a gauche de ton écran.</p>
-                <p>La touche ECHAP de ton clavier marche aussi pour ce menu.</p>
-            </div>
-        } @else {
-            <div class="modules-list d-flex flex-column gap-3" cdkDropList (cdkDropListDropped)="drop($event)">
-                @for (module of projectsService.modules; track module) {
-                    <div class="card module" cdkDrag>
-                        @switch (module.getType()) {
-                            @case("ImageAndImageModule") {
-                                <app-admin-image-and-image-module [moduleId]="module.getId()"></app-admin-image-and-image-module>
+        <div class="modules-div">
+            @if (projectsService.modules.length === 0) {
+                <div class="no-modules-container">
+                    <p>Pas de modules ! 👋</p>
+                    <p>Ajoute un module avec le bouton 📂 a gauche de ton écran.</p>
+                    <p>La touche ECHAP de ton clavier marche aussi pour ce menu.</p>
+                </div>
+            } @else {
+                <div class="modules-list d-flex flex-column gap-3" cdkDropList (cdkDropListDropped)="drop($event)">
+                    @for (module of projectsService.modules; track module) {
+                        <div class="card module" cdkDrag>
+                            @switch (module.getType()) {
+                                @case("ImageAndImageModule") {
+                                    <app-admin-image-and-image-module [moduleId]="module.getId()"></app-admin-image-and-image-module>
+                                }
+                                @case("ImageAndTextModule") {
+                                    <app-admin-image-and-text-module [moduleId]="module.getId()"></app-admin-image-and-text-module>
+                                }
+                                @case ("TextAndImageModule") {
+                                    <app-admin-text-and-image-module [moduleId]="module.getId()"></app-admin-text-and-image-module>
+                                }
+                                @case ("TextProjectModule") {
+                                    <app-admin-text-module [moduleId]="module.getId()"></app-admin-text-module>
+                                }
+                                @case ("VideoModule") {
+                                    <app-admin-video-module [moduleId]="module.getId()"></app-admin-video-module>
+                                }
+                                @case ("ImageModule") {
+                                    <app-admin-image-module [moduleId]="module.getId()"></app-admin-image-module>
+                                }
                             }
-                            @case("ImageAndTextModule") {
-                                <app-admin-image-and-text-module [moduleId]="module.getId()"></app-admin-image-and-text-module>
-                            }
-                            @case ("TextAndImageModule") {
-                                <app-admin-text-and-image-module [moduleId]="module.getId()"></app-admin-text-and-image-module>
-                            }
-                            @case ("TextProjectModule") {
-                                <app-admin-text-module [moduleId]="module.getId()"></app-admin-text-module>
-                            }
-                            @case ("VideoModule") {
-                                <app-admin-video-module [moduleId]="module.getId()"></app-admin-video-module>
-                            }
-                            @case ("ImageModule") {
-                                <app-admin-image-module [moduleId]="module.getId()"></app-admin-image-module>
-                            }
-                        }
-                    </div>
-                }
-            </div>
-        }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
     </div>
 } @else {
     <app-loader></app-loader>
