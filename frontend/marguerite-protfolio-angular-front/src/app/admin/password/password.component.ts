@@ -62,6 +62,7 @@ export class PasswordComponent {
               this.confirmPasswordErrors.push(fieldError.message);
             }
           }
+          this.requestError = err.error;
         } else {
           this.requestError = 'Erreur lors de la modification du mot de passe. Veuillez réessayer ou contacter votre admin.';
         }
