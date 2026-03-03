@@ -39,5 +39,7 @@ export class ButtonComponent implements AfterViewInit, OnDestroy {
     } else {
       this.onClick.emit()
     }
+
+    this.ngOnDestroy()
   }
 }

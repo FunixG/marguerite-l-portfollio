@@ -1,5 +1,6 @@
 import {ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, Injectable} from "@angular/core";
 import {AdminProjectMediasManagerComponent} from "./admin-project-medias-manager.component";
+import {ProjectMediaDto} from "../../../dtos/projects/project-media-dto";
 
 @Injectable()
 export default class AdminProjectMediasManagerService {
@@ -11,7 +12,7 @@ export default class AdminProjectMediasManagerService {
         private readonly environmentInjector: EnvironmentInjector
     ) {}
 
-    openModal(onPick: (mediaId: string) => void = () => {}) {
+    openModal(onPick: (media: ProjectMediaDto) => void = () => {}) {
         if (this.modalRef) {
             return;
         }
@@ -21,8 +22,8 @@ export default class AdminProjectMediasManagerService {
         });
 
         this.modalRef.instance.closed.subscribe(() => this.closeModal());
-        this.modalRef.instance.mediaSelected.subscribe((mediaId: string) => {
-            onPick(mediaId);
+        this.modalRef.instance.mediaSelected.subscribe((media: ProjectMediaDto) => {
+            onPick(media);
         });
 
         this.appRef.attachView(this.modalRef.hostView)

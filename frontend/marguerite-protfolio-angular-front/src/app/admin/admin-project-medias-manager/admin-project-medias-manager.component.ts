@@ -1,9 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import ProjectsMediasService from "../../../services/projects/projects-medias-service";
-import {ProjectMediaDto} from "../../../dtos/projects/project-media-dto";
+import {ProjectMediaDto, ProjectMediaType} from "../../../dtos/projects/project-media-dto";
 import {PageOption} from "../../../lib/dtos/page-dto";
 import {QueryBuilder} from "../../../lib/query-builder";
-import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-admin-project-medias-manager',
@@ -15,13 +14,21 @@ export class AdminProjectMediasManagerComponent implements OnInit {
 
   loading = true;
   medias: ProjectMediaDto[] = [];
+  mediaTypes = ProjectMediaType;
+
+  addMedia = false;
+  fileUpload?: File
+  fileUploadDescription: string = '';
+  fileUploadLoading = false;
+
   private page = 0;
-  private noMoreMedias = false;
+  noMoreMedias = false;
 
   @Output() closed = new EventEmitter<void>();
-  @Output() mediaSelected = new EventEmitter<string>();
+  @Output() mediaSelected = new EventEmitter<ProjectMediaDto>();
 
-  constructor(private readonly mediasService: ProjectsMediasService) {
+  constructor(protected readonly mediasService: ProjectsMediasService,
+              private readonly cdRef: ChangeDetectorRef) {
   }
 
   onClose(): void {
@@ -32,6 +39,42 @@ export class AdminProjectMediasManagerComponent implements OnInit {
     this.load();
   }
 
+  onSelectMedia(media: ProjectMediaDto): void {
+    this.mediaSelected.emit(media);
+    this.onClose()
+  }
+
+  onFileSelected(event: any): void {
+    this.fileUpload = event.target.files[0];
+  }
+
+  onAddNewMedia(): void {
+    if (!this.fileUpload) {
+      alert('Veuillez sélectionner un fichier à uploader');
+      return;
+    }
+
+    this.fileUploadLoading = true;
+
+    const request = new ProjectMediaDto();
+    request.mediaDescription = this.fileUploadDescription;
+    request.mediaType = this.fileUpload.type === 'video/mp4' ? ProjectMediaType.VIDEO : ProjectMediaType.IMAGE;
+
+    this.mediasService.sendFile(request, this.fileUpload).subscribe({
+      next: (media) => {
+        this.medias.push(media);
+        this.fileUploadLoading = false;
+        this.addMedia = false;
+        this.cdRef.detectChanges();
+      },
+      error: (err) => {
+        this.fileUploadLoading = false;
+        this.cdRef.detectChanges();
+        alert('Une erreur est survenue lors de l\'upload du média : ' + err.message);
+      }
+    })
+  }
+
   loadNextPage(): void {
     if (this.noMoreMedias) {
       return;
@@ -39,10 +82,6 @@ export class AdminProjectMediasManagerComponent implements OnInit {
 
     this.page++;
     this.load();
-  }
-
-  getMediaUrl(media: ProjectMediaDto): string {
-    return environment.apiUrl + '/projects/media/file/' + media.id;
   }
 
   onDeleteMedia(media: ProjectMediaDto): void {
@@ -57,6 +96,7 @@ export class AdminProjectMediasManagerComponent implements OnInit {
     this.mediasService.delete(media.id).subscribe({
       next: () => {
         this.medias = this.medias.filter(m => m.id !== media.id);
+        this.cdRef.detectChanges();
       },
       error: (err) => {
         alert('Une erreur est survenue lors de la suppression du média : ' + err.message);
@@ -74,13 +114,15 @@ export class AdminProjectMediasManagerComponent implements OnInit {
 
     this.mediasService.find(pageOptions, new QueryBuilder()).subscribe({
       next: (medias) => {
-        this.medias = medias.content;
-        this.noMoreMedias = medias.totalPages < this.page;
+        this.medias.push(...medias.content);
+        this.noMoreMedias = medias.totalPages - 1 <= this.page;
         this.loading = false;
+        this.cdRef.detectChanges();
       },
       error: (err) => {
         alert('Une erreur est survenue lors du chargement des médias : ' + err.message);
         this.loading = false;
+        this.cdRef.detectChanges();
       }
     })
   }
