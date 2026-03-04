@@ -1,0 +1,8 @@
+.mgl-media {
+    width: 600px;
+    height: 600px;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}

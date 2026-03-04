@@ -6,6 +6,7 @@ import ProjectsMediasService from "../../../../services/projects/projects-medias
   selector: 'app-media',
   imports: [],
   templateUrl: './media.component.html',
+  styleUrl: './media.component.css'
 })
 export class MediaComponent {
 
