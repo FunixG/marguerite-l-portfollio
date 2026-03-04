@@ -18,6 +18,7 @@ export class AdminImageModuleComponent extends ModuleComponent<ImageModule> {
       this.mediaService.getById(module.imageId).subscribe({
         next: (media) => {
           this.image = media;
+          this.cdRef.detectChanges();
         },
         error: (err) => {
           alert("Erreur de chargement de l'image : " + err.message)
@@ -38,6 +39,7 @@ export class AdminImageModuleComponent extends ModuleComponent<ImageModule> {
 
       this.image = media
       this.module.imageId = media.id
+      this.module.altImage = media.mediaDescription
     })
   }
 

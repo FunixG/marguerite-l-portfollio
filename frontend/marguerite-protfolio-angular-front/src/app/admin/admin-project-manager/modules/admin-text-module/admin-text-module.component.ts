@@ -15,4 +15,12 @@ export class AdminTextModuleComponent extends ModuleComponent<TextProjectModule>
     this.text = module.text || ""
   }
 
+  setText(data: string) {
+    this.text = data
+
+    if (this.module) {
+      this.module.text = data
+    }
+  }
+
 }

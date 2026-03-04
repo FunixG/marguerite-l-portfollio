@@ -51,15 +51,16 @@ export class PasswordComponent {
         this.loading = false;
 
         if (err.status === 400) {
-          this.formSent = true;
-
           for (let fieldError of err.fieldErrors) {
             if (fieldError.field === 'oldPassword') {
               this.currentPasswordErrors.push(fieldError.message);
+              this.formSent = true;
             } else if (fieldError.field === 'newPassword') {
               this.newPasswordErrors.push(fieldError.message);
+              this.formSent = true;
             } else if (fieldError.field === 'confirmPassword') {
               this.confirmPasswordErrors.push(fieldError.message);
+              this.formSent = true;
             }
           }
           this.requestError = err.error;

@@ -9,7 +9,7 @@ export class TextProjectModule extends ProjectModule {
     }
 
     getHtml(): string {
-        return "<p>" + this.text + "</p>";
+        return `<div class="text-module"><p>${this.text}</p></div>`;
     }
 
     toJsonData(): string {

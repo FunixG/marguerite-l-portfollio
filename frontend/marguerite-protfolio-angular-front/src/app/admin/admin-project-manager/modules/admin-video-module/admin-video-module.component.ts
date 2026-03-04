@@ -17,9 +17,10 @@ export class AdminVideoModuleComponent extends ModuleComponent<VideoModule> {
       this.mediaService.getById(module.videoId).subscribe({
         next: (media) => {
           this.video = media;
+          this.cdRef.detectChanges();
         },
         error: (err) => {
-          alert("Erreur de chargement de l'image : " + err.message)
+          alert("Erreur de chargement de la vidéo : " + err.message)
         }
       })
     }

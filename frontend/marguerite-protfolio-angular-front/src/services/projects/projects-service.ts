@@ -50,7 +50,56 @@ export default class ProjectsService extends CrudHttpClient<ProjectDto> {
         }
     }
 
-    setPageCodeInProject(): void {
+    save(success: (project: ProjectDto) => void = (_: ProjectDto) => {},
+         fail: (error: ErrorDto) => void = (_: ErrorDto) => {}): void {
+        if (!this.loadedProject) {
+            fail(new ErrorDto('Pas de projet chargé', -1, 1, []));
+            return;
+        }
+
+        if (this.loadedProject.title.length === 0 || this.loadedProject.path.length === 0) {
+            fail(new ErrorDto('Veuillez remplir le titre du projet.', -1, 1, []));
+            return;
+        }
+        if (this.loadedProject.description.length === 0) {
+            fail(new ErrorDto('Veuillez remplir la description du projet.', -1, 1, []));
+            return;
+        }
+        if (this.loadedProject.coverMediaId.length === 0) {
+            fail(new ErrorDto('Veuillez sélectionner une image de couverture pour le projet.', -1, 1, []));
+            return;
+        }
+
+        this.setPageCodeInProject();
+
+        if (this.modules.length === 0 || this.loadedProject.htmlCode.length === 0 || this.loadedProject.jsonCode.length === 0) {
+            fail(new ErrorDto('Le projet doit contenir au moins un module.', -1, 1, []));
+            return;
+        }
+
+        if (this.loadedProject.id) {
+            this.update(this.loadedProject).subscribe({
+                next: (project) => {
+                    success(project);
+                },
+                error: (err: ErrorDto) => {
+                    fail(err);
+                }
+            });
+        } else {
+            this.create(this.loadedProject).subscribe({
+                next: (project) => {
+                    this.loadedProject = project;
+                    success(project);
+                },
+                error: (err: ErrorDto) => {
+                    fail(err);
+                }
+            });
+        }
+    }
+
+    private setPageCodeInProject(): void {
         if (!this.loadedProject) return;
 
         let jsonList: string[] = [];

@@ -3,7 +3,7 @@
               class="description-input"
               [placeholder]="placeholder"
               rows="6"
-              [value]="text"
-              (input)="textChange.emit(text)"
+              [(ngModel)]="text"
+              (input)="onTextChange()"
       ></textarea>
 </div>

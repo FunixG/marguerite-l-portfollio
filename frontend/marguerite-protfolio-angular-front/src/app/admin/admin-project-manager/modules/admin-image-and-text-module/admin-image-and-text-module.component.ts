@@ -20,11 +20,20 @@ export class AdminImageAndTextModuleComponent extends ModuleComponent<ImageAndTe
       this.mediaService.getById(module.imageId).subscribe({
         next: (media) => {
           this.image = media;
+          this.cdRef.detectChanges();
         },
         error: (err) => {
           alert("Erreur de chargement de l'image : " + err.message)
         }
       })
+    }
+  }
+
+  setText(data: string) {
+    this.text = data
+
+    if (this.module) {
+      this.module.text = data
     }
   }
 
@@ -40,6 +49,7 @@ export class AdminImageAndTextModuleComponent extends ModuleComponent<ImageAndTe
 
       this.image = media
       this.module.imageId = media.id
+      this.module.altImage = media.mediaDescription
     })
   }
 

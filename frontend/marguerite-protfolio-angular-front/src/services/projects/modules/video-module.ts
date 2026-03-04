@@ -1,4 +1,5 @@
 import {ProjectModule} from "./base-project-module";
+import ProjectsMediasService from "../projects-medias-service";
 
 export class VideoModule extends ProjectModule {
 
@@ -10,7 +11,7 @@ export class VideoModule extends ProjectModule {
     }
 
     getHtml(): string {
-        return "";
+        return `<div class="video-module"><video muted autoplay loop><source src="${ProjectsMediasService.getMediaUrl(this.videoId)}" type="video/mp4"></video></div>`;
     }
 
     toJsonData(): string {

@@ -18,6 +18,7 @@ export class AdminImageAndImageModuleComponent extends ModuleComponent<ImageAndI
       this.mediaService.getById(module.firstImageId).subscribe({
         next: (media) => {
           this.first = media;
+          this.cdRef.detectChanges();
         },
         error: (err) => {
           alert("Erreur de chargement de l'image : " + err.message)
@@ -29,6 +30,7 @@ export class AdminImageAndImageModuleComponent extends ModuleComponent<ImageAndI
       this.mediaService.getById(module.secondImageId).subscribe({
         next: (media) => {
           this.second = media;
+          this.cdRef.detectChanges();
         },
         error: (err) => {
           alert("Erreur de chargement de l'image : " + err.message)
@@ -50,9 +52,11 @@ export class AdminImageAndImageModuleComponent extends ModuleComponent<ImageAndI
       if (first) {
         this.first = media
         this.module.firstImageId = media.id
+        this.module.altFirstImage = media.mediaDescription
       } else {
         this.second = media
         this.module.secondImageId = media.id
+        this.module.altSecondImage = media.mediaDescription
       }
     })
   }

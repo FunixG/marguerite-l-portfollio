@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import ProjectsService from "../../../../services/projects/projects-service";
 import AdminProjectMediasManagerService from "../../admin-project-medias-manager/admin-project-medias-manager.service";
 import {ProjectMediaDto, ProjectMediaType} from "../../../../dtos/projects/project-media-dto";
@@ -15,13 +15,15 @@ export class ProjectCoverImageComponent implements OnInit {
 
   constructor(protected readonly projectsService: ProjectsService,
               protected readonly mediasService: ProjectsMediasService,
-              private readonly modalService: AdminProjectMediasManagerService) {
+              private readonly modalService: AdminProjectMediasManagerService,
+              private readonly cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     if (this.projectsService.loadedProject?.coverMediaId) {
       this.mediasService.getById(this.projectsService.loadedProject.coverMediaId).subscribe(media => {
         this.media = media;
+        this.cdRef.detectChanges();
       });
     }
   }
