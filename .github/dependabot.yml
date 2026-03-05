@@ -5,3 +5,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: 'npm'
+    directory: '/frontend/marguerite-protfolio-angular-front'
+    schedule:
+      interval: 'daily'
+
+  - package-ecosystem: "gradle"
+    directory: "/backend/api-marguerite-l-portfolio"
+    schedule:
+      interval: "daily"

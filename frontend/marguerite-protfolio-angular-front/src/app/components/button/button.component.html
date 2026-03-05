@@ -1,0 +1,16 @@
+@if (loading) {
+    <button class="btn {{ classBtn }}" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+    </button>
+} @else {
+    <button
+            [disabled]="disabled"
+            type="button"
+            class="btn {{ classBtn }}"
+            (click)="clickEvent()"
+            [attr.title]="tooltip"
+            data-bs-toggle="tooltip"
+    >
+        {{ label }}
+    </button>
+}

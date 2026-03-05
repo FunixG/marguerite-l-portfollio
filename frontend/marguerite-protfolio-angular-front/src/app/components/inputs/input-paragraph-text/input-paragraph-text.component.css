@@ -1,0 +1,26 @@
+.description-input-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.description-input {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 0 0 12px 0;
+    border: none;
+    border-bottom: 2.5px solid #1976d2;
+    background: transparent;
+    outline: none;
+    resize: vertical;
+    min-height: 120px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: none;
+}
+
+.description-input:focus {
+    border-bottom: 2.5px solid #1565c0;
+    background: transparent;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+}

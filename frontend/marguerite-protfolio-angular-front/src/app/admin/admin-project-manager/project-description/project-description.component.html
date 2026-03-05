@@ -1,0 +1,6 @@
+@if (projectsService.loadedProject) {
+    <app-input-paragraph-text
+            [text]="projectsService.loadedProject.description"
+            (textChange)="projectsService.loadedProject.description = $event"
+    ></app-input-paragraph-text>
+}

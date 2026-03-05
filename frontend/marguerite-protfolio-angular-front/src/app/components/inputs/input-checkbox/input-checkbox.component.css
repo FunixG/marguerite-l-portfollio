@@ -1,0 +1,54 @@
+.ios-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ios-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.slider {
+    position: relative;
+    width: 51px;
+    height: 31px;
+    background-color: #e5e5ea;
+    border-radius: 31px;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 0 0.5px rgba(0, 0, 0, 0.04);
+}
+
+.ios-toggle input:checked + .slider {
+    background-color: #34c759;
+}
+
+.ios-toggle input:checked + .slider::before {
+    transform: translateX(20px);
+}
+
+.ios-toggle input:disabled + .slider {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.ios-toggle input:disabled ~ .label-text {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

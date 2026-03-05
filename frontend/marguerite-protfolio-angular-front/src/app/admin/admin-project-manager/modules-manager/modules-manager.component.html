@@ -1,0 +1,154 @@
+<div class="module-manager">
+    @if (menuOpened) {
+        <div class="opened-menu-container p-2 d-flex flex-column gap-3">
+
+            <div class="card">
+                <h5 class="card-header">Deux images</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-image-preview></app-image-preview>
+                        </div>
+                        <div class="col">
+                            <app-image-preview></app-image-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('ImageAndImageModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Image et texte</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-image-preview></app-image-preview>
+                        </div>
+                        <div class="col">
+                            <app-text-preview></app-text-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('ImageAndTextModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Texte et image</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-text-preview></app-text-preview>
+                        </div>
+                        <div class="col">
+                            <app-image-preview></app-image-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('TextAndImageModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Paragraphe</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-text-preview></app-text-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('TextProjectModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Vidéo</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-video-preview></app-video-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('VideoModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">Image</h5>
+                <div class="card-body">
+                    <div class="row align-items-center text-center">
+                        <div class="col">
+                            <app-image-preview></app-image-preview>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col d-flex justify-content-end">
+                            <app-button
+                                    [label]="'+'"
+                                    [tooltip]="'Ajouter le module'"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="addModule('ImageModule')"
+                            ></app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    <div class="button-open-menu-container">
+        <button class="button-open-menu" (click)="menuOpened = !menuOpened">
+            {{ menuOpened ? '📂' : '📁' }}
+        </button>
+    </div>
+</div>

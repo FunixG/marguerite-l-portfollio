@@ -1,0 +1,28 @@
+<div class="screen-center">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">⚙️ Administration</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Salut Marguerite 💅</h6>
+            <p class="card-text">Entre ton mot de passe pour gérer ton portfolio.</p>
+
+            <div class="pb-2">
+                <app-input-text
+                        [label]="'Mot de passe'"
+                        [placeholder]="'Entre ton mot de passe'"
+                        [isPassword]="true"
+                        [text]="password"
+                        [inputErrors]="errors"
+                        [formSent]="formSent"
+                        (textChange)="password = $event"
+                ></app-input-text>
+            </div>
+
+            <app-button
+                    [label]="'Se connecter'"
+                    [classBtn]="'btn-primary'"
+                    [loading]="loadingRequest"
+                    (onClick)="login()"
+            ></app-button>
+        </div>
+    </div>
+</div>

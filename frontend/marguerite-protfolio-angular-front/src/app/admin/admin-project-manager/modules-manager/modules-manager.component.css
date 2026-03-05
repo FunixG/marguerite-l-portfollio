@@ -1,0 +1,51 @@
+.module-manager {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.opened-menu-container {
+    top: 0;
+    left: 0;
+    width: 40vw;
+    height: 100vh;
+    background: rgba(20, 21, 23, 0.95);
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
+    pointer-events: auto;
+    scroll-behavior: smooth;
+    overflow: scroll;
+}
+
+.module-manager.menu-opened .opened-menu-container {
+    transform: translateX(0);
+}
+
+.button-open-menu-container {
+    position: relative;
+    top: 50%;
+    height: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    pointer-events: auto;
+}
+
+.button-open-menu {
+    width: 40px;
+    height: 80px;
+    border: none;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.button-open-menu:hover {
+    background: #7e8c7c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+}

@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Service
+@Slf4j(topic = "JwtService")
 public class JwtService {
 
     private final SecretKey jwtSecretKey;
@@ -25,7 +27,7 @@ public class JwtService {
                 .build();
     }
 
-    public String generateToken() {
+    public String generateToken() throws ApiException {
         final Date expirationDate = Date.from(Instant.now().plusSeconds(604800));
 
         try {
@@ -42,9 +44,9 @@ public class JwtService {
 
     public boolean isTokenValid(String token) {
         try {
-            this.jwtParser.parse(token);
+            this.jwtParser.parseSignedClaims(token);
             return true;
-        } catch (Exception _) {
+        } catch (Exception e) {
             return false;
         }
     }

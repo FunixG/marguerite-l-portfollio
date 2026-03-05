@@ -1,0 +1,91 @@
+<div class="modal-wrapper">
+    <div class="modal-medias">
+        <div class="card">
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                Gestionnaire de médias
+
+                <div>
+                    <app-button (onClick)="addMedia = !addMedia" [label]="addMedia ? 'Annuler' : 'Nouveau'" [tooltip]="addMedia ? 'Revenir a la liste' : 'Importer une image ou vidéo'"></app-button>
+                    <span class="ps-3">
+                        <app-button (onClick)="onClose()" [label]="'X'" [tooltip]="'Fermer'" [classBtn]="'btn-danger'"></app-button>
+                    </span>
+                </div>
+            </h5>
+            <div class="card-body">
+                @if (addMedia) {
+                    <div class="mb-3">
+                        <label for="mediaInput" class="form-label">Ajouter un média</label>
+                        <input type="file" class="form-control" id="mediaInput" (change)="onFileSelected($event)" accept="image/*,video/mp4">
+
+                        <div class="pt-3">
+                            <app-input-text
+                                    [label]="'Description du média'"
+                                    [placeholder]="'Entrez une description pour le média'"
+                                    [text]="fileUploadDescription"
+                                    (textChange)="fileUploadDescription = $event"
+                            ></app-input-text>
+                        </div>
+
+                        <div class="pt-3 text-center">
+                            <app-button
+                                    [label]="'Ajouter le média'"
+                                    [tooltip]="'Ajouter le média à la liste'"
+                                    [loading]="fileUploadLoading"
+                                    [classBtn]="'btn-success'"
+                                    (onClick)="onAddNewMedia()"
+                            ></app-button>
+                        </div>
+                    </div>
+                } @else {
+                    <div class="row g-3">
+                        @for (media of medias; track media.id) {
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <div class="card h-100">
+                                    <app-media [media]="media"></app-media>
+
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <app-button
+                                                        [label]="'Sélectionner'"
+                                                        [tooltip]="'Sélectionner ce média'"
+                                                        [classBtn]="'btn-primary btn-sm w-100'"
+                                                        (onClick)="onSelectMedia(media)"
+                                                ></app-button>
+                                            </div>
+                                            <div class="col-2">
+                                                <app-button
+                                                        [label]="'Supprimer'"
+                                                        [tooltip]="'Supprimer ce média'"
+                                                        [classBtn]="'btn-danger btn-sm'"
+                                                        (onClick)="onDeleteMedia(media)"
+                                                ></app-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (noMoreMedias) {
+                            <div class="col-12">
+                                <p class="text-center">Pas plus de médias disponibles !</p>
+                            </div>
+                        } @else {
+                            <div class="col-12 text-center">
+                                <app-button
+                                        [label]="'Charger plus de médias'"
+                                        [tooltip]="'Charger plus de médias dans la liste'"
+                                        [loading]="loading"
+                                        (onClick)="loadNextPage()"
+                                ></app-button>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-medias-overlay" (click)="onClose()"></div>
+</div>

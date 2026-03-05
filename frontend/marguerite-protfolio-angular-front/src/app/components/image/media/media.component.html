@@ -1,0 +1,8 @@
+@if (media.mediaType === mediaTypes.VIDEO) {
+    <video controls class="card-img-top mgl-media">
+        <source [src]="mediasService.getMediaUrl(media)" [type]="'video/mp4'">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+    </video>
+} @else {
+    <img [src]="mediasService.getMediaUrl(media)" class="card-img-top mgl-media" alt="{{ media.mediaDescription }}">
+}

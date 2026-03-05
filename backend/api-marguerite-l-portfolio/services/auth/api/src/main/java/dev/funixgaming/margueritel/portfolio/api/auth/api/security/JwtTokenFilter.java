@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j(topic = "JwtTokenFilter")
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final Cache<String, Boolean> sessionsCache = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).build();
@@ -58,14 +61,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             }
 
             if (isValid) {
-                final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken("admin", null, Collections.emptyList());
+                final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        "admin",
+                        null,
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+                );
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
             chain.doFilter(request, response);
-        } catch (Exception _) {
+        } catch (Exception e) {
             chain.doFilter(request, response);
         }
     }

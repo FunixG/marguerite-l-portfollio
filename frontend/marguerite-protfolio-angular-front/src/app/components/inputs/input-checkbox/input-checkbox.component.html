@@ -1,0 +1,12 @@
+<label class="ios-toggle">
+    <input
+            type="checkbox"
+            [checked]="checked"
+            [disabled]="disabled"
+            (change)="onCheckEvent($event)"
+    />
+    <span class="slider"></span>
+    @if (label) {
+        <span>{{ label }}</span>
+    }
+</label>

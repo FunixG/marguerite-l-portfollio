@@ -1,0 +1,25 @@
+@if (label.length > 0) {
+    <label [for]="id" class="form-label">{{ label }}</label>
+}
+
+<input
+        [type]="isPassword ? 'password' : 'text'"
+        class="form-control"
+        [placeholder]="placeholder"
+        [(ngModel)]="text"
+        [id]="id"
+        [disabled]="disabled"
+        [value]="text"
+        [required]="required"
+        (input)="onInput()"
+        [ngClass]="{
+                'is-invalid': formSent && inputErrors.length > 0,
+                'is-valid': formSent && inputErrors.length === 0
+             }"
+>
+
+@for (error of inputErrors; track error) {
+    <div class="invalid-feedback">
+        {{ error }}
+    </div>
+}

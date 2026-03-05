@@ -1,0 +1,35 @@
+<div class="card mb-3">
+    <div class="card-header">
+        {{ project.title }}
+    </div>
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img [src]="getProjectImage()" class="img-fluid rounded-start" alt="Illustration du projet {{ project.title }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <p class="card-text">{{ project.description }}</p>
+                <app-input-checkbox
+                        [label]="'Publié (visible sur le portfolio)'"
+                        [checked]="project.isVisible"
+                        [disabled]="loading"
+                        (onChange)="switchProjectVisibility()"
+                ></app-input-checkbox>
+
+                <div class="d-flex gap-2 mt-3">
+                    <app-button
+                            [label]="'Modifier le projet'"
+                            [url]="'/admin/projects/' + project.id"
+                    ></app-button>
+
+                    <app-button
+                            [label]="'Supprimer le projet'"
+                            [classBtn]="'btn-danger'"
+                            (onClick)="deleteProject()"
+                    ></app-button>
+                </div>
+                <p class="card-text"><small class="text-body-secondary">Crée le {{ project.createdAt | date }}</small></p>
+            </div>
+        </div>
+    </div>
+</div>

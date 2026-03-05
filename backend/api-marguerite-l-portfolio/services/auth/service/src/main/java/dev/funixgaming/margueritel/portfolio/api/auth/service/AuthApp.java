@@ -5,11 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = "dev.funixgaming")
 @SpringBootApplication(
-        scanBasePackages = "dev.funixgaming",
+        scanBasePackages = {
+                "dev.funixgaming.spring.core",
+                "dev.funixgaming.margueritel.portfolio.api.auth.service"
+        },
         exclude = {
                 DataSourceAutoConfiguration.class,
                 DataSourceTransactionManagerAutoConfiguration.class,
