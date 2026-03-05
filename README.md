@@ -11,11 +11,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
 
-<br/>
-
-![GitHub last commit](https://img.shields.io/github/last-commit/FunixG/marguerite-l-portfolio?style=flat-square&color=pink)
-![GitHub repo size](https://img.shields.io/github/repo-size/FunixG/marguerite-l-portfolio?style=flat-square&color=purple)
-
 </div>
 
 ---
