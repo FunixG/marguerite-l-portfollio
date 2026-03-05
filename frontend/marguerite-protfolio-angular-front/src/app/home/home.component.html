@@ -1,1 +1,29 @@
-<p>home works!</p>
+<div class="home-container">
+    <div class="projects-grid">
+        @for (project of projects; track project.id) {
+            <div
+                    class="project-card"
+                    [class.card-large]="$index % 5 === 0"
+                    [class.card-tall]="$index % 5 === 3"
+                    (click)="openProject(project)"
+            >
+                <div class="card-image-wrapper">
+                    <img
+                            [src]="mediasService.getMediaThumbnailUrl(project.coverMediaId)"
+                            [alt]="project.title"
+                            class="card-image"
+                    />
+                </div>
+                <div class="card-label">
+                    <span>{{ project.title }}</span>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (hasMore) {
+        <div class="load-more-wrapper">
+            <button class="load-more-btn" (click)="nextPage()">Voir plus</button>
+        </div>
+    }
+</div>

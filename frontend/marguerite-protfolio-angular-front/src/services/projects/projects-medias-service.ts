@@ -17,6 +17,10 @@ export default class ProjectsMediasService extends StorageCrudHttpClient<Project
         return environment.apiUrl + '/projects/media/file/' + media.id;
     }
 
+    getMediaThumbnailUrl(mediaId: string): string {
+        return environment.apiUrl + '/projects/media/file/' + mediaId;
+    }
+
     static getMediaUrl(mediaId: string): string {
         return environment.apiUrl + '/projects/media/file/' + mediaId;
     }
